@@ -15,8 +15,8 @@ class ScoutaiBackend():
 
     tool = TavilySearchTool()  
 
-    llama = LLM(model="groq/llama-3.3-70b-versatile")
-    oss = LLM(model="groq/openai/gpt-oss-120b")
+    minimax = LLM(model="ollama/minimax-m3:cloud")
+    gemma = LLM(model="ollama/gemma4:31b-cloud")
     
 
 
@@ -25,7 +25,7 @@ class ScoutaiBackend():
         """Agent to research competitors in the startup space"""
         return Agent(
             config = self.agents_config["research_analyst"],
-            llm=self.llama,
+            llm=self.minimax,
             tools=[self.tool],
             verbose = False
         )
@@ -35,7 +35,7 @@ class ScoutaiBackend():
         """Agent to analyze market trends and competitor strategies"""
         return Agent(
             config = self.agents_config["market_analyst"],
-            llm=self.oss,
+            llm=self.gemma,
             tools=[self.tool],
             verbose = False
         )
