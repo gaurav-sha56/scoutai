@@ -1,0 +1,70 @@
+search_competitors:
+  description: >
+    Search the web for startups operating in the {domain} space.
+    For each competitor found, gather the following:
+    - Company name and founding year
+    - Core product or service offering
+    - Target customer segment (B2B / B2C / B2B2C)
+    - Known funding rounds and total raised (if public)
+    - Geographic presence (India-focused, global, etc.)
+    - Any recent news, product launches, or partnerships (last 6 months)
+
+    Use multiple targeted searches. Try queries like:
+    "{domain} startups India 2024", "{domain} competitors funding",
+    "{domain} top companies", "best {domain} platforms".
+
+    Aim to find at least 5-8 distinct competitors.
+  expected_output: >
+    A structured list of 5-8 competitors with the following fields for each:
+    Company Name, Founded, Offering, Target Segment, Funding, Geography,
+    Recent News. Format as a clean markdown table or bullet-point sections.
+  agent: research_analyst
+
+analyze_competitive_landscape:
+  description: >
+    Using the competitor data provided, perform a thorough competitive analysis
+    of the {domain} market. Your analysis must cover:
+
+    1. **Market Positioning Map** — Who is going after which customer segment?
+       Which players overlap most with {our_startup}?
+    2. **Feature Comparison** — What core features are table stakes vs
+       differentiators in this space?
+    3. **Funding & Traction** — Who is well-funded and scaling fast? Who is
+       bootstrapped or stagnant?
+    4. **Whitespace Opportunities** — Are there underserved segments, geographies,
+       or use cases that competitors are ignoring?
+    5. **Key Threats** — Which 2-3 competitors pose the most direct threat to
+       {our_startup} and why?
+  expected_output: >
+    A structured competitive analysis with 5 clearly labeled sections as
+    described above. Use bullet points within each section. Keep it sharp —
+    no generic filler statements. Every claim should be grounded in the
+    research data provided.
+  agent: market_analyst
+  context:
+    - search_competitors
+
+write_intel_report:
+  description: >
+    Write a professional Competitor Intelligence Report for {our_startup}
+    operating in the {domain} space.
+
+    The report must include:
+    1. **Executive Summary** (3-4 sentences max — the TL;DR for a busy founder)
+    2. **Competitive Landscape Overview** (who's in the market, brief market context)
+    3. **Competitor Profiles** (condensed from research — key facts per player)
+    4. **Competitive Analysis** (positioning, features, funding insights)
+    5. **Strategic Recommendations** (3-5 concrete actions {our_startup} can take
+       based on the intelligence gathered)
+
+    Tone: Direct, confident, professional. Written for a founder, not a consultant.
+    Avoid jargon. Make it scannable with headers and bullets where appropriate.
+  expected_output: >
+    A complete Competitor Intelligence Report in clean markdown format,
+    with all 5 sections clearly structured. Should be comprehensive enough
+    to share with co-founders or investors, yet concise enough to read in
+    under 10 minutes.
+  agent: report_writer
+  context:
+    - search_competitors
+    - analyze_competitive_landscape

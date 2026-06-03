@@ -1,0 +1,56 @@
+
+
+# Virtual environments
+scoutai_backend/.venv/
+scoutai_backend/venv/
+scoutai_backend/env/
+
+# Environment variables
+scoutai_backend/.env
+
+scoutai_backend/__pycache__/
+scoutai_backend/**/*.pyc
+*.py[cod]
+
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies
+scoutai-frontend/node_modules/
+
+# Next.js build output
+scoutai-frontend/.next/
+scoutai-frontend/out/
+
+# Environment variables
+scoutai-frontend/.env
+scoutai-frontend/.env.local
+scoutai-frontend/.env.production
+scoutai-frontend/.env.development
+
+# Build artifacts
+scoutai-frontend/dist/
+scoutai-frontend/build/
+
+
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+

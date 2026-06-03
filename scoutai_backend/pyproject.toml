@@ -1,0 +1,27 @@
+[project]
+name = "scoutai_backend"
+version = "0.1.0"
+description = "scoutai-backend using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[litellm,tools]>=1.14.0",
+    "fastapi>=0.136.3",
+    "tavily-python>=0.7.25",
+]
+
+
+[project.scripts]
+scoutai_backend = "scoutai_backend.main:run"
+run_crew = "scoutai_backend.main:run"
+train = "scoutai_backend.main:train"
+replay = "scoutai_backend.main:replay"
+test = "scoutai_backend.main:test"
+run_with_trigger = "scoutai_backend.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
