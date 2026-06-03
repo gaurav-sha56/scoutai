@@ -183,6 +183,12 @@ export default function ScoutAIPage() {
                 <FileText className="w-4 h-4 text-indigo-400" />
                 <span className="text-sm font-medium text-slate-300">Analysis Workspace</span>
               </div>
+              {error && (
+                <div className="text-red-400 bg-red-900/20 border border-red-500/30 
+                  rounded-lg p-4 text-sm">
+                  {error}
+                </div>
+              )}
 
               {report && (
                 <div className="flex items-center gap-2">
