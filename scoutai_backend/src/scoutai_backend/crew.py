@@ -15,9 +15,8 @@ class ScoutaiBackend():
 
     tool = TavilySearchTool()  
 
-    minimax = LLM(model="ollama/minimax-m3:cloud")
-    gemma = LLM(model="ollama/gemma4:31b-cloud")
-    
+    minimax = LLM(model="minimax-m3:cloud", base_url="https://ollama.com/v1")
+    gemma = LLM(model="gemma4:31b-cloud", base_url="https://ollama.com/v1")
 
 
     @agent
