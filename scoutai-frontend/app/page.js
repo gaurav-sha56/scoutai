@@ -46,7 +46,7 @@ export default function ScoutAIPage() {
       const data = await res.json();
 
       if (res.status === 429) {
-        setError("⚠️ AI engine is busy or daily limit reached. Please try again in 30 seconds.");
+        setError("⚠️ AI engine is busy or daily limit reached. Please try again after some time.");
         return;
       }
 
