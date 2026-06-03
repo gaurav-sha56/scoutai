@@ -4,6 +4,8 @@ from scoutai_backend.crew import ScoutaiBackend
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
+import asyncio
+from functools import partial
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
@@ -20,7 +22,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","https://scoutai-lilac.vercel.app"],  
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -48,18 +50,19 @@ app.add_middleware(
 #         raise Exception(f"An error occurred while running the crew: {e}")
 
 @app.post('/run_crew')
-async def run_async(query : Query):
+async def run_async(query: Query):
     inputs = {
-        'domain' : query.domain,
-        'our_startup' : query.startup
+        'domain': query.domain,
+        'our_startup': query.startup
     }
     try:
-        crew_response = result = ScoutaiBackend().crew().kickoff(inputs=inputs)
-        return {
-            "status" : "ok",
-            "report_md" : crew_response.raw
-        }
+        loop = asyncio.get_event_loop()
+        crew_response = await loop.run_in_executor(
+            None, 
+            partial(ScoutaiBackend().crew().kickoff, inputs=inputs)
+        )
+        return {"status": "ok", "report_md": crew_response.raw}
     except Exception as e:
-        if "rate_limit" in str(e).lower() or "RateLimitError" in str(e):
+        if "rate_limit" in str(e).lower():
             raise HTTPException(status_code=429, detail="Rate limit hit, try again in 30s")
         raise HTTPException(status_code=500, detail=str(e))

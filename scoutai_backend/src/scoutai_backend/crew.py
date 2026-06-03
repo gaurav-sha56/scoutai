@@ -35,7 +35,7 @@ class ScoutaiBackend():
         """Agent to analyze market trends and competitor strategies"""
         return Agent(
             config = self.agents_config["market_analyst"],
-            llm=self.gemma,
+            llm=self.minimax,
             tools=[self.tool],
             verbose = False
         )
@@ -45,7 +45,7 @@ class ScoutaiBackend():
         """Agent to compile research findings into a comprehensive report"""
         return Agent(
             config = self.agents_config["report_writer"],
-            llm=self.oss,
+            llm=self.gemma,
             tools=[],
             verbose = False
         )
