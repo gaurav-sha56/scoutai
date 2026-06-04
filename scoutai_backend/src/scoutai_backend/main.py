@@ -34,9 +34,9 @@ app.add_middleware(
 #     """
 #     Run the crew.
 #     """
-#     domain = <your startup domain>
-#     startup =  < your startup name >
-#
+#     domain = 
+#     startup =  
+
 #     inputs = {
 #         'domain': domain,
 #         'our_startup' : startup

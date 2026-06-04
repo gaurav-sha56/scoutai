@@ -2,6 +2,9 @@ from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai_tools import SerperDevTool, TavilySearchTool
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
 
 @CrewBase
 class ScoutaiBackend():
@@ -9,14 +12,12 @@ class ScoutaiBackend():
 
     agents: list[BaseAgent]
     tasks: list[Task]
-    # tool = SerperDevTool(
-    #     country = "INDIA"
-    # )
+    tool = SerperDevTool()
 
-    tool = TavilySearchTool()  
+    # tool = TavilySearchTool()  
 
-    minimax = LLM(model="minimax-m3:cloud", base_url="https://ollama.com/v1")
-    gemma = LLM(model="gemma4:31b-cloud", base_url="https://ollama.com/v1")
+    llama = LLM(model = "groq/llama-3.3-70b-versatile")
+    oss = LLM(model = "groq/openai/gpt-oss-120b")
 
 
     @agent
@@ -24,7 +25,7 @@ class ScoutaiBackend():
         """Agent to research competitors in the startup space"""
         return Agent(
             config = self.agents_config["research_analyst"],
-            llm=self.minimax,
+            llm=self.llama,
             tools=[self.tool],
             verbose = False
         )
@@ -34,7 +35,7 @@ class ScoutaiBackend():
         """Agent to analyze market trends and competitor strategies"""
         return Agent(
             config = self.agents_config["market_analyst"],
-            llm=self.minimax,
+            llm=self.llama,
             tools=[self.tool],
             verbose = False
         )
@@ -44,7 +45,7 @@ class ScoutaiBackend():
         """Agent to compile research findings into a comprehensive report"""
         return Agent(
             config = self.agents_config["report_writer"],
-            llm=self.gemma,
+            llm=self.oss,
             tools=[],
             verbose = False
         )
@@ -68,6 +69,5 @@ class ScoutaiBackend():
             agents = self.agents,
             tasks = self.tasks,
             process = Process.sequential,
-            verbose = False,
-            tracing=True
+            verbose = True,
         )

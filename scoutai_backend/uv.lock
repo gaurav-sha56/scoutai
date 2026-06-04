@@ -3258,6 +3258,7 @@ dependencies = [
     { name = "crewai", extra = ["litellm", "tools"] },
     { name = "fastapi" },
     { name = "tavily-python" },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
@@ -3265,6 +3266,7 @@ requires-dist = [
     { name = "crewai", extras = ["litellm", "tools"], specifier = ">=1.14.0" },
     { name = "fastapi", specifier = ">=0.136.3" },
     { name = "tavily-python", specifier = ">=0.7.25" },
+    { name = "uvicorn", specifier = ">=0.34.0" },
 ]
 
 [[package]]
