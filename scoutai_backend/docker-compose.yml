@@ -1,0 +1,38 @@
+services:
+  scoutai_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: scoutai-backend:latest
+    container_name: scoutai_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PORT=8000
+    # Optional: if you run Ollama locally on host machine:
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+  # Optional: Uncomment if you want to run Ollama locally in a dedicated container
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   restart: unless-stopped
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_models:/root/.ollama
+  #   # Optional GPU support:
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - driver: nvidia
+  #   #           count: 1
+  #   #           capabilities: [gpu]
+
+# volumes:
+#   ollama_models:
